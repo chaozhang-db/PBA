@@ -5,7 +5,7 @@ import Tuples.LongTuple;
 public class MaxLongs implements Aggregation<LongTuple, LongTuple, LongTuple> {
 
     @Override
-    public LongTuple creatAccumulator() {
+    public LongTuple createAccumulator() {
         return LongTuple.MIN_VALUE;
     }
 

@@ -4,7 +4,7 @@ import Tuples.IntTuple;
 
 public class SumInts implements Aggregation<IntTuple, IntTuple, IntTuple> {
     @Override
-    public IntTuple creatAccumulator() {
+    public IntTuple createAccumulator() {
         return new IntTuple(0);
     }
 

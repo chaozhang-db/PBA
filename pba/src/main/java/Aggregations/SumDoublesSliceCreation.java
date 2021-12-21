@@ -4,7 +4,7 @@ import Tuples.DoubleTuple;
 
 public class SumDoublesSliceCreation implements Aggregation<DoubleTuple, DoubleTuple, DoubleTuple> {
     @Override
-    public DoubleTuple creatAccumulator() {
+    public DoubleTuple createAccumulator() {
         return new DoubleTuple(0.0);
     }
 

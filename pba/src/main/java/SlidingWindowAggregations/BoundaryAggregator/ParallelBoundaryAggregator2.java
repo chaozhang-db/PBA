@@ -85,9 +85,9 @@ public class ParallelBoundaryAggregator2<Tuple extends StreamingTuple, SliceAggr
 
 
     private SliceAggregation[] creatSAA() {
-        SliceAggregation[] saa = aggregation.creatAccumulator().createArrayOfACC(chunkSize);
+        SliceAggregation[] saa = aggregation.createAccumulator().createArrayOfACC(chunkSize);
         for (int j = 0; j < chunkSize; j++)
-            saa[j] = aggregation.creatAccumulator();
+            saa[j] = aggregation.createAccumulator();
         return saa;
     }
 
@@ -113,7 +113,7 @@ public class ParallelBoundaryAggregator2<Tuple extends StreamingTuple, SliceAggr
             ringBuffer.add(sliceAggregationArray);
             sliceAggregationArray = bufferPoolOfSliceAggregationArrays.poll();
             chunkAggregation = accumulatedSliceAggregation;
-            accumulatedSliceAggregation = aggregation.creatAccumulator();
+            accumulatedSliceAggregation = aggregation.createAccumulator();
 
             sliceIndex = 0;
         }
@@ -178,8 +178,8 @@ public class ParallelBoundaryAggregator2<Tuple extends StreamingTuple, SliceAggr
 
         marginToChunkBoundary = 2 * chunkSize - range / slice;
 
-        chunkAggregation = aggregation.creatAccumulator();
-        accumulatedSliceAggregation = aggregation.creatAccumulator();
+        chunkAggregation = aggregation.createAccumulator();
+        accumulatedSliceAggregation = aggregation.createAccumulator();
 
         bufferPoolOfSliceAggregationArrays = new ArrayDeque<>(4);
 

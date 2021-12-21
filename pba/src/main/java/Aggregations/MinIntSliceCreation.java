@@ -4,7 +4,7 @@ import Tuples.IntTuple;
 
 public class MinIntSliceCreation implements Aggregation<IntTuple, IntTuple, IntTuple>{
     @Override
-    public IntTuple creatAccumulator() { // creates a new slice aggregation instance
+    public IntTuple createAccumulator() { // creates a new slice aggregation instance
         return new IntTuple(Integer.MAX_VALUE);
     }
 

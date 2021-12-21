@@ -45,7 +45,7 @@ public abstract class AbstractTwoStack<Tuple extends StreamingTuple, SliceAggreg
 
 
     SliceAggregation getAccumulatedAggFromStack(ArrayDeque<TwoStackNode> stack){
-        return (stack.isEmpty()) ? aggregation.creatAccumulator() : stack.peek().accumulatedSliceAgg;
+        return (stack.isEmpty()) ? aggregation.createAccumulator() : stack.peek().accumulatedSliceAgg;
     }
 
 
@@ -57,7 +57,7 @@ public abstract class AbstractTwoStack<Tuple extends StreamingTuple, SliceAggreg
 
     @Override
     public void insert(SliceAggregation sliceAggregation) {
-        TwoStackNode temp = (bufferPoolOfTwoStackNodes.isEmpty()) ? new TwoStackNode(aggregation.creatAccumulator(),aggregation.creatAccumulator()) : bufferPoolOfTwoStackNodes.poll();
+        TwoStackNode temp = (bufferPoolOfTwoStackNodes.isEmpty()) ? new TwoStackNode(aggregation.createAccumulator(),aggregation.createAccumulator()) : bufferPoolOfTwoStackNodes.poll();
 
         temp.sliceAgg = sliceAggregation;
         combineSliceAggIntoStack(backStack, temp);

@@ -15,7 +15,7 @@ public class SlickDequeMomentSketchAgg extends SlickDequeAggregation<DoubleTuple
     }
 
     @Override
-    public MomentSketch creatAccumulator() {
+    public MomentSketch createAccumulator() {
         return new MomentSketch(k);
     }
 

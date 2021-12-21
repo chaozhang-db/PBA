@@ -23,6 +23,6 @@ public class SlickDequeNonInv<Tuple extends StreamingTuple, SliceAggregation ext
 
     @Override
     void fillBufferPool(Queue<SlickDequeNode> bufferPool) {
-        bufferPool.add(new SlickDequeNode(-1, aggregation.creatAccumulator()));
+        bufferPool.add(new SlickDequeNode(-1, aggregation.createAccumulator()));
     }
 }

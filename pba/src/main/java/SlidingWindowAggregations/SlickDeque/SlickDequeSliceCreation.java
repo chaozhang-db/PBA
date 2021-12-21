@@ -23,7 +23,7 @@ public class SlickDequeSliceCreation<Tuple extends StreamingTuple, SliceAggregat
 
         this.aggregation = aggregation;
         int sizeOfNonInv = aggregation.getNumOfNonInvAgg();
-        partialAggregation = aggregation.creatAccumulator();
+        partialAggregation = aggregation.createAccumulator();
 
         queueOfSliceAgg = new ArrayDeque<>();
         listOfSlickNonInvDeques = new ArrayList<>();
@@ -42,7 +42,7 @@ public class SlickDequeSliceCreation<Tuple extends StreamingTuple, SliceAggregat
 
         this.aggregation = aggregation;
         int sizeOfNonInv = aggregation.getNumOfNonInvAgg();
-        partialAggregation = aggregation.creatAccumulator();
+        partialAggregation = aggregation.createAccumulator();
 
         listOfSlickNonInvDeques = new ArrayList<>();
         queueOfSliceAgg = new ArrayDeque<>();
@@ -84,7 +84,7 @@ public class SlickDequeSliceCreation<Tuple extends StreamingTuple, SliceAggregat
 
     @Override
     public SliceAggregation query() {
-        SliceAggregation ret = aggregation.creatAccumulator();
+        SliceAggregation ret = aggregation.createAccumulator();
         ret.update(partialAggregation);
         aggregation.setNonInvAggResultToACC(ret,listOfSlickNonInvDeques);
         return ret;

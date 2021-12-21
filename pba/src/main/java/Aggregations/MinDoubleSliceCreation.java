@@ -4,7 +4,7 @@ import Tuples.DoubleTuple;
 
 public class MinDoubleSliceCreation implements Aggregation<DoubleTuple, DoubleTuple, DoubleTuple>{
     @Override
-    public DoubleTuple creatAccumulator() { // creates a new slice aggregation instance
+    public DoubleTuple createAccumulator() { // creates a new slice aggregation instance
         return new DoubleTuple(Double.MAX_VALUE);
     }
 

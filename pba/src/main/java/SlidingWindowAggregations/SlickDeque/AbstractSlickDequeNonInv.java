@@ -51,13 +51,13 @@ public abstract class AbstractSlickDequeNonInv<Tuple extends StreamingTuple, Sli
      */
     @Override
     public void insert(SliceAggregation sliceAggregation) {
-        if (!sliceAggregation.equals(aggregation.creatAccumulator())){ // the reason of this sentence has been explained above.
+        if (!sliceAggregation.equals(aggregation.createAccumulator())){ // the reason of this sentence has been explained above.
             while (!deque.isEmpty() && canEvict(sliceAggregation))
                 bufferPoolOfSlickDequeNodes.add(deque.removeLast());
         }
 
 //        SlickDequeNode temp = bufferPoolOfSlickDequeNodes.poll();
-        SlickDequeNode temp = (bufferPoolOfSlickDequeNodes.isEmpty()) ? new SlickDequeNode(-1, aggregation.creatAccumulator()) : bufferPoolOfSlickDequeNodes.poll();
+        SlickDequeNode temp = (bufferPoolOfSlickDequeNodes.isEmpty()) ? new SlickDequeNode(-1, aggregation.createAccumulator()) : bufferPoolOfSlickDequeNodes.poll();
 
         temp.pos = currentPosition;
         temp.sliceAggregation = sliceAggregation;
@@ -84,7 +84,7 @@ public abstract class AbstractSlickDequeNonInv<Tuple extends StreamingTuple, Sli
         this.currentPosition = (isRangeMultipleOfSlice()) ? numberOfSlicesInEachWindowInstance - 1 : 0;
 
         this.deque = new ArrayDeque<>();
-        this.deque.addLast(new SlickDequeNode(-1,aggregation.creatAccumulator()));
+        this.deque.addLast(new SlickDequeNode(-1,aggregation.createAccumulator()));
 
         bufferPoolOfSlickDequeNodes = new ArrayDeque<>();
         for (int i=0; i<numberOfSlicesInEachWindowInstance-1; i++)

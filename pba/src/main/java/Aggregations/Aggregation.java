@@ -7,26 +7,26 @@ import Tuples.StreamingTuple;
  * @param <IN> type of streaming tuples.
  * @param <ACC> type of partial aggregations, or slice aggregations.
  * @param <OUT> type of final aggregation results.
- * The aggregate function interface follows the same signature as the one of Apache Flink(see https://ci.apache.org/projects/flink/flink-docs-release-1.13/api/java/org/apache/flink/api/common/functions/AggregateFunction.html)
- * From a mathematical point of view, aggregation is usually defined by the (lift, combine, Lower) framework.
+ * The aggregate function interface follows the same signature as the one of Apache Flink (AggregateFunction)
+ * Aggregate functions are usually defined by the LCL framework (lift, combine, Lower).
  * The lift and combine function together corresponds to the add function in this interface.
  * The combine function corresponds to the merge function in this interface.
  * The lower function corresponds to the getResult function in this interface.
  *
  * Different implementations of an aggregation will have a huge impact for system performance.
  * We discuss some lessons we learned from our experiments for each functions below.
- * Overall recommendation is to avoid creating instance on fly.
+ * The overall recommendation is to avoid creating instance on the fly.
  * Otherwise, throughput will be bounded by only several million events/second (one or two million events/second, depending on the size of main memory).
- * The main reason is creating two many objects, which also leads to too much overhead for GC.
+ * This is due to creating two many objects, which also leads to the overhead of GC.
  */
 public interface Aggregation <IN extends StreamingTuple, ACC extends PartialAggregation<ACC>, OUT> {
     /**
-     * This function will creat a slice aggregation with an identity element, i.e., the 0 value for Sum, or the minimum value for Max.
+     * This function will create a slice aggregation with an identity element, i.e., the 0 value for Sum, or the minimum value for Max.
      * In general, creatAccumulator() needs to create a new instance of accumulator with the zero value, e.g., Sum.
      * However, for some aggregations, e.g., Max and Min, a good implementation for creatAccumulator() is to return a constant objection with zero values, instead of creating an accumulator for each slice.
      * An example of such an implementation is shown by the MaxInts class under the same package.
      */
-    ACC creatAccumulator();
+    ACC createAccumulator();
 
     /**
      * This function will merge two slice aggregations (a slice aggregation is a partial aggregation over a slice)

@@ -4,7 +4,7 @@ import Tuples.IntTuple;
 
 public class MinInts implements Aggregation<IntTuple, IntTuple, IntTuple>{
     @Override
-    public IntTuple creatAccumulator() {
+    public IntTuple createAccumulator() {
         return IntTuple.MAX_VALUE;
     }
 

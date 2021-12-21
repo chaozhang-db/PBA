@@ -5,7 +5,7 @@ import Tuples.DoubleTuple;
 public class MaxDoubles implements Aggregation<DoubleTuple, DoubleTuple, DoubleTuple> {
 
     @Override
-    public DoubleTuple creatAccumulator() {
+    public DoubleTuple createAccumulator() {
         return DoubleTuple.MIN_VALUE;
     }
 

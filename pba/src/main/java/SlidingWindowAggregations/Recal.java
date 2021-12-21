@@ -26,7 +26,7 @@ public class Recal<Tuple extends StreamingTuple, SliceAggregation extends Partia
         if (isRangeMultipleOfSlice()) numOfSlicesInEachWindow--;
 
         for (int i=0; i<numOfSlicesInEachWindow; i++)
-           deque.add(aggregation.creatAccumulator());
+           deque.add(aggregation.createAccumulator());
 
         this.deque = deque;
     }
@@ -43,7 +43,7 @@ public class Recal<Tuple extends StreamingTuple, SliceAggregation extends Partia
 
     @Override
     public SliceAggregation query() {
-        SliceAggregation temp = aggregation.creatAccumulator();
+        SliceAggregation temp = aggregation.createAccumulator();
         int i=0;
         for (SliceAggregation sliceAggregation : deque){
             temp = aggregation.merge(temp, sliceAggregation);

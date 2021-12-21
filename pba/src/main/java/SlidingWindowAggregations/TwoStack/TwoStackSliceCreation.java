@@ -26,14 +26,14 @@ public class TwoStackSliceCreation<Tuple extends StreamingTuple, SliceAggregatio
     @Override
     void fillFrontStackAndBufferPools(long numOfSlices) {
         for (int i = 0; i < numOfSlices; i++) {
-            getFrontStack().add(new TwoStackNode(aggregation.creatAccumulator(),aggregation.creatAccumulator()));
-            getBufferPoolOfTwoStackNodes().add(new TwoStackNode(null,aggregation.creatAccumulator()));
+            getFrontStack().add(new TwoStackNode(aggregation.createAccumulator(),aggregation.createAccumulator()));
+            getBufferPoolOfTwoStackNodes().add(new TwoStackNode(null,aggregation.createAccumulator()));
         }
     }
 
     @Override
     public SliceAggregation query() {
-        SliceAggregation sliceAggregation = aggregation.creatAccumulator();
+        SliceAggregation sliceAggregation = aggregation.createAccumulator();
         if (!getFrontStack().isEmpty()){
             sliceAggregation.update(getAccumulatedAggFromStack(getFrontStack()));
         }

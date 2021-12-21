@@ -5,7 +5,6 @@ import Tuples.PartialAggregation;
 import Tuples.StreamingTuple;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Queue;
 
 public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTuple, SliceAggregation extends PartialAggregation<SliceAggregation>, FinalAggregation> {
@@ -51,7 +50,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
                 (range % slide == 0) ?
                 first.getTimeStamp() :
                 (first.getTimeStamp() - (slide - range % slide));
-        SliceAggregation sliceAggregation = aggregation.creatAccumulator();
+        SliceAggregation sliceAggregation = aggregation.createAccumulator();
 
         long currentTimeStamp = first.getTimeStamp(), lastTimeStamp;
         long stepSize = (range % slide == 0) ? slide : range % slide;// step size is not bigger than a slide or slice, and is required for the case time stamps are not continuous.
@@ -67,7 +66,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
                 while (progressingTimeStamp < currentTimeStamp){// progressing lastTimeStamp until lastTimeStamp == currentTimeStamp - 1.
                     if ((progressingTimeStamp - sliceStartTime) >= slice){
                         insert(sliceAggregation);
-                        sliceAggregation = aggregation.creatAccumulator();
+                        sliceAggregation = aggregation.createAccumulator();
                         sliceStartTime += slice;
                     }
                     if ((progressingTimeStamp - timeInSlideInterval) >= slide){
@@ -81,7 +80,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
             if ((currentTimeStamp - sliceStartTime) >= slice){
                 insert(sliceAggregation);
-                sliceAggregation = aggregation.creatAccumulator();
+                sliceAggregation = aggregation.createAccumulator();
                 sliceStartTime += slice;
             }
 
@@ -110,7 +109,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
                 (range % slide == 0) ?
                 first.getTimeStamp() :
                 (first.getTimeStamp() - (slide - range % slide));
-        SliceAggregation sliceAggregation = aggregation.creatAccumulator();
+        SliceAggregation sliceAggregation = aggregation.createAccumulator();
 
         long currentTimeStamp = first.getTimeStamp(), lastTimeStamp;
         long stepSize = (range % slide == 0) ? slide : range % slide;
@@ -125,7 +124,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
                 while (progressingTimeStamp < currentTimeStamp){
                     if ((progressingTimeStamp - sliceStartTime) >= slice){
                         insert(sliceAggregation);
-                        sliceAggregation = aggregation.creatAccumulator();
+                        sliceAggregation = aggregation.createAccumulator();
                         sliceStartTime += slice;
                     }
                     if ((progressingTimeStamp - timeInSlideInterval) >= slide){
@@ -139,7 +138,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
             if ((currentTimeStamp - sliceStartTime) >= slice){
                 insert(sliceAggregation);
-                sliceAggregation = aggregation.creatAccumulator();
+                sliceAggregation = aggregation.createAccumulator();
                 sliceStartTime += slice;
             }
 
@@ -160,7 +159,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
         int indexInSlice = 0, indexInSlideInterval = (range % slide == 0) ? 0 : (int)(slide - range % slide);// indexInSlideInterval is the offset for output.
 
-        SliceAggregation sliceAggregation = aggregation.creatAccumulator();
+        SliceAggregation sliceAggregation = aggregation.createAccumulator();
 
         for (Tuple tuple : stream){
             sliceAggregation = aggregation.add(sliceAggregation, tuple);
@@ -168,7 +167,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
             if (indexInSlice == slice){ // a slice ends
                 insert(sliceAggregation);
-                sliceAggregation = aggregation.creatAccumulator();
+                sliceAggregation = aggregation.createAccumulator();
                 indexInSlice = 0;
             }
 
@@ -190,7 +189,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
         int indexInSlice = 0, indexInSlideInterval = (range % slide == 0) ? 0 : (slide - range % slide);
 
-        SliceAggregation sliceAggregation = aggregation.creatAccumulator();
+        SliceAggregation sliceAggregation = aggregation.createAccumulator();
 
         int i=0;
 
@@ -201,7 +200,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
             if (indexInSlice == slice){ // a slice ends
                 insert(sliceAggregation);
-                sliceAggregation = aggregation.creatAccumulator();
+                sliceAggregation = aggregation.createAccumulator();
                 indexInSlice = 0;
             }
 
@@ -226,7 +225,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
         int indexInSlice = 0, indexInSlideInterval = (range % slide == 0) ? 0 : (slide - range % slide);
 
-        SliceAggregation sliceAggregation = aggregation.creatAccumulator();
+        SliceAggregation sliceAggregation = aggregation.createAccumulator();
 
         int i=0;
 
@@ -241,7 +240,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
             if (indexInSlice == slice){ // a slice ends
                 insert(sliceAggregation);
-                sliceAggregation = aggregation.creatAccumulator();
+                sliceAggregation = aggregation.createAccumulator();
                 indexInSlice = 0;
             }
 
@@ -274,7 +273,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
                 (range % slide == 0) ?
                         first.getTimeStamp() :
                         (first.getTimeStamp() - (slide - range % slide));
-        SliceAggregation sliceAggregation = aggregation.creatAccumulator();
+        SliceAggregation sliceAggregation = aggregation.createAccumulator();
 
         long currentTimeStamp = first.getTimeStamp(), lastTimeStamp;
         long stepSize = (range % slide == 0) ? slide : range % slide;
@@ -294,7 +293,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
                 while (progressingTimeStamp < currentTimeStamp){
                     if ((progressingTimeStamp - sliceStartTime) >= slice){
                         insert(sliceAggregation);
-                        sliceAggregation = aggregation.creatAccumulator();
+                        sliceAggregation = aggregation.createAccumulator();
                         sliceStartTime += slice;
                     }
                     if ((progressingTimeStamp - timeInSlideInterval) >= slide){
@@ -308,7 +307,7 @@ public abstract class AbstractSlidingWindowAggregation<Tuple extends StreamingTu
 
             if ((currentTimeStamp - sliceStartTime) >= slice){
                 insert(sliceAggregation);
-                sliceAggregation = aggregation.creatAccumulator();
+                sliceAggregation = aggregation.createAccumulator();
                 sliceStartTime += slice;
             }
 

@@ -24,8 +24,8 @@ public class TwoStack<Tuple extends StreamingTuple, SliceAggregation extends Par
     @Override
     void fillFrontStackAndBufferPools(long numOfSlices) {
         for (int i=0; i<numOfSlices; i++){
-            getFrontStack().add(new TwoStackNode(aggregation.creatAccumulator(),aggregation.creatAccumulator()));
-            getBufferPoolOfTwoStackNodes().add(new TwoStackNode(aggregation.creatAccumulator(),aggregation.creatAccumulator()));
+            getFrontStack().add(new TwoStackNode(aggregation.createAccumulator(),aggregation.createAccumulator()));
+            getBufferPoolOfTwoStackNodes().add(new TwoStackNode(aggregation.createAccumulator(),aggregation.createAccumulator()));
         }
     }
 

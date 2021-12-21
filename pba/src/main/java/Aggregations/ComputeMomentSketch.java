@@ -12,7 +12,7 @@ public class ComputeMomentSketch implements Aggregation<DoubleTuple, MomentSketc
     }
 
     @Override
-    public MomentSketch creatAccumulator() {
+    public MomentSketch createAccumulator() {
         return new MomentSketch(k);
     }
 

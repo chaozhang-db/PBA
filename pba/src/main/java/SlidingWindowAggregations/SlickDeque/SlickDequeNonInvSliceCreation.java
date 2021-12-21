@@ -19,7 +19,7 @@ public class SlickDequeNonInvSliceCreation<Tuple extends StreamingTuple, SliceAg
 
     @Override
     boolean canEvict(SliceAggregation sliceAggregation) {
-        SliceAggregation temp = aggregation.creatAccumulator();
+        SliceAggregation temp = aggregation.createAccumulator();
         temp.update(getDeque().peekLast().sliceAggregation);
         return (aggregation.merge(temp, sliceAggregation).equals(sliceAggregation));
     }
