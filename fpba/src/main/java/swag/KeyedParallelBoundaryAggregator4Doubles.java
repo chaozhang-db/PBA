@@ -1,4 +1,4 @@
-package slidingWindowAggregator;
+package swag;
 
 import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.api.java.tuple.Tuple2;
